@@ -15,7 +15,13 @@ import {
 } from "react-admin";
 import { useMediaQuery } from "@material-ui/core";
 
-const PostTitle = ({ record }) => {
+interface PostTitleProps {
+    record?: {
+        title: string
+    }
+};
+
+const PostTitle:React.FC<PostTitleProps> = ({ record }) => {
     return <span>Post {record ? `"${record.title}"` : ""}</span>;
 };
 
