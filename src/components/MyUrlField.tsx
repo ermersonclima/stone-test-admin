@@ -4,9 +4,7 @@ import { useRecordContext } from "react-admin";
 import { makeStyles } from "@material-ui/core/styles";
 import LaunchIcon from "@material-ui/icons/Launch";
 
-/* import { makeStyles } from "@mui/styles";
-import LaunchIcon from "@mui/icons-material/Launch";
- */
+import { MyUrlFieldProps } from "../types/types";
 
 const useStyles = makeStyles({
     link: {
@@ -19,7 +17,7 @@ const useStyles = makeStyles({
     }
 });
 
-const MyUrlField = ({ source }) => {
+const MyUrlField = ({ source }:MyUrlFieldProps) => {
     const record = useRecordContext();
     const classes = useStyles();
     return record ? (

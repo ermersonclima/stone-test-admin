@@ -10,7 +10,7 @@ import authProvider from "./authProvider.ts";
 import dataProvider from "./dataProvider.ts";
 
 const dataProviderFromJsonplaceholder = jsonServerProvider("https://jsonplaceholder.typicode.com");
-const App = () => (
+const App:React.FC = () => (
   <Admin dashboard={Dashboard} dataProvider={dataProviderFromJsonplaceholder} authProvider={authProvider}>
     <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
     <Resource name="users" list={UserList} icon={UserIcon} />

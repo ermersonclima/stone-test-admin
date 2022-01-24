@@ -11,15 +11,13 @@ import {
     ReferenceInput,
     SelectInput,
     TextInput,
-    Create
+    Create,
+    EditProps,
+    CreateProps,
+    ListProps
 } from "react-admin";
 import { useMediaQuery } from "@material-ui/core";
-
-interface PostTitleProps {
-    record?: {
-        title: string
-    }
-};
+import { PostTitleProps } from "../types/types";
 
 const PostTitle:React.FC<PostTitleProps> = ({ record }) => {
     return <span>Post {record ? `"${record.title}"` : ""}</span>;
@@ -32,7 +30,7 @@ const postFilters = [
     </ReferenceInput>,
 ];
 
-export const PostList = props => {
+export const PostList:React.FC<ListProps> = props => {
     const isSmall = useMediaQuery(theme => theme.breakpoints.down("sm"));
     return (
         <List filters={postFilters} {...props}>
@@ -58,7 +56,7 @@ export const PostList = props => {
     );
 };
 
-export const PostEdit = props => (
+export const PostEdit:React.FC<EditProps> = props => (
     <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
@@ -72,7 +70,7 @@ export const PostEdit = props => (
     </Edit>
 );
 
-export const PostCreate = props => (
+export const PostCreate:React.FC<CreateProps> = props => (
     <Create {...props}>
         <SimpleForm>
             <ReferenceInput source="userId" reference="users">
