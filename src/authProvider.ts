@@ -1,5 +1,7 @@
-export default {
-    login: ({ username, password }) => {
+import { ILogin, IStatus } from "./types/types";
+
+const authProvider = {
+    login: ({ username, password }:ILogin) => {
         if (username.length > 3 && password.length > 3) {
             localStorage.setItem("username", username+password);
             return Promise.resolve();     
@@ -11,7 +13,7 @@ export default {
         localStorage.removeItem("username");
         return Promise.resolve();
     },
-    checkError: ({ status }) => {
+    checkError: ({ status }:IStatus) => {
         if (status === 401 || status === 403) {
             localStorage.removeItem("username");
             return Promise.reject();
@@ -23,3 +25,5 @@ export default {
     },
     getPermissions: () => Promise.resolve(),
 };
+
+export default authProvider;

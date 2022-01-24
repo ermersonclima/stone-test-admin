@@ -3,11 +3,10 @@ import PostIcon from "@material-ui/icons/Book";
 import UserIcon from "@material-ui/icons/Group";
 import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
-import { UserList } from "./components/users.tsx";
-import { PostList, PostCreate, PostEdit } from "./components/posts.tsx";
-import Dashboard from "./components/Dashboard.tsx";
-import authProvider from "./authProvider.ts";
-import dataProvider from "./dataProvider.ts";
+import { UserList } from "./components/users";
+import { PostList, PostCreate, PostEdit } from "./components/posts";
+import Dashboard from "./components/Dashboard";
+import authProvider from "./authProvider";
 
 const dataProviderFromJsonplaceholder = jsonServerProvider("https://jsonplaceholder.typicode.com");
 const App:React.FC = () => (

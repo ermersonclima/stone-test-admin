@@ -4,7 +4,7 @@ import { stringify } from "query-string";
 const apiUrl = "https://my-imaginary-api.net";//absent API
 const httpClient = fetchUtils.fetchJson;
 
-export default dataProvider = {
+const dataProvider = {
     getList: (resource, params) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
@@ -91,3 +91,5 @@ export default dataProvider = {
         }).then(({ json }) => ({ data: json }));
     }
 };
+
+export default dataProvider;
