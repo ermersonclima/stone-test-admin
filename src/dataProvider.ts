@@ -5,7 +5,7 @@ const apiUrl = "https://my-imaginary-api.net";//absent API
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
-    getList: (resource, params) => {
+    getList: (resource:string, params:{pagination:{page:number, perPage:number}, sort:{field?:number, order?:number}, filter?:number}) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
@@ -21,12 +21,12 @@ const dataProvider = {
         }));
     },
 
-    getOne: (resource, params) =>
+    getOne: (resource:string, params:{id:number}) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
             data: json,
         })),
 
-    getMany: (resource, params) => {
+    getMany: (resource:string, params:{ids:string}) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
         };
@@ -34,7 +34,7 @@ const dataProvider = {
         return httpClient(url).then(({ json }) => ({ data: json }));
     },
 
-    getManyReference: (resource, params) => {
+    getManyReference: (resource:string, params:{pagination:{page:number, perPage:number},sort:{field?:number, order:number}, filter?:Object, target:number, id:number}) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
@@ -53,13 +53,13 @@ const dataProvider = {
         }));
     },
 
-    update: (resource, params) =>
+    update: (resource:string, params:{id:number, data?:Object}) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: "PUT",
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({ data: json })),
 
-    updateMany: (resource, params) => {
+    updateMany: (resource:string, params:{ids:string, data?:Object}) => {
         const query = {
             filter: JSON.stringify({ id: params.ids}),
         };
@@ -69,7 +69,7 @@ const dataProvider = {
         }).then(({ json }) => ({ data: json }));
     },
 
-    create: (resource, params) =>
+    create: (resource:string, params:{data?:Object}) =>
         httpClient(`${apiUrl}/${resource}`, {
             method: "POST",
             body: JSON.stringify(params.data),
@@ -77,12 +77,12 @@ const dataProvider = {
             data: { ...params.data, id: json.id },
         })),
 
-    delete: (resource, params) =>
+    delete: (resource:string, params:{id:number}) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: "DELETE",
         }).then(({ json }) => ({ data: json })),
 
-    deleteMany: (resource, params) => {
+    deleteMany: (resource: string, params:{ids:string}) => {
         const query = {
             filter: JSON.stringify({ id: params.ids}),
         };
